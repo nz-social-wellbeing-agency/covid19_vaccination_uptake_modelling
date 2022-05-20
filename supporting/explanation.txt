@@ -1,0 +1,3 @@
+The code in this folder generally reads in metadata tables, but for 3 SQL tables it reads them in and makes changes to prepare them for merging onto the overall dataset. 
+
+Importantly, this code only needs to be updated (to capture the new tables for those 3 datasets) if the refresh changes.
