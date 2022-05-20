@@ -8,9 +8,9 @@ Repositry: covid19_vaccination_update_modelling
 
     The population is created in SQL using a number of sources. To update the population – required every time MOH uploads additional CIR, HSU, and NHI data – the following file (latest version) needs to be updated and re-run. Save the new version dated as of the date that the code was edited. 
    
-```
-I:\MAA2021-49\SWA_development\Main\Staging\Population definitions\YYYYMMDD_CODE_40_population_and_CIR.sql
-```
+    ```
+    I:\MAA2021-49\SWA_development\Main\Staging\Population definitions\YYYYMMDD_CODE_40_population_and_CIR.sql
+    ```
 
     There are **four table references at the top of the script (CIR_date, CIR_ref, Adhoc_HSU_ref, CIR_NHI_ref)** which correspond to MOH’s ad hoc tables. The dates correspond do the day the CIR and associated tables are updated, NOT the latest date of the CIR activity.
    
@@ -18,9 +18,9 @@ I:\MAA2021-49\SWA_development\Main\Staging\Population definitions\YYYYMMDD_CODE_
 
     There is a section of code at the end of the **YYYYMMDD_CODE_40_population_and_CIR.sql** file which also produces three tables using the CIR data. Two are read into Stata and one is used by the DAT. These tables are: 
 	
-       •   [IDI_Sandpit].[DL-MAA2021-49].[HSU_death_data];
-       •   [IDI_Sandpit].[DL-MAA2021-49].[vacc_clean_DHB_of_service_202203]; and
-       •   [IDI_Sandpit].[DL-MAA2021-49].[vacc_202203_$(CIR_NHI_ref)]
+       *   [IDI_Sandpit].[DL-MAA2021-49].[HSU_death_data];
+       *   [IDI_Sandpit].[DL-MAA2021-49].[vacc_clean_DHB_of_service_202203]; and
+       *   [IDI_Sandpit].[DL-MAA2021-49].[vacc_202203_$(CIR_NHI_ref)]
 	   
     **To conserve the amount of space the project uses it is recommended to periodically delete the older population and CIR related tables.**
 
