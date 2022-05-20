@@ -1,16 +1,36 @@
 # CIR Vaccination Uptake Data Development Process
 
+Construction of the COVID19 vaccination update dataset.
+
 Repositry: covid19_vaccination_update_modelling
 
-## SQL table updates
+## Overview
 
-1)  Population creation & CIR data grab
+To understand vaccination patterns and support all New Zealanders getting vaccinated, the Social Wellbeing Agency undertook analysis of COVID19 vaccination uptake in the IDI. As part of this research, we recreated the vaccination research dataset each time new vaccination data was provided by the Ministry of Health.
+
+To support the efforts of other researchers, we made this research dataset available to other researchers. This improved consistency across research projects and saved time by reducing duplication. This repositry contains the code to build the research dataset we used, so that future researchers might benefit.
+
+## Instructions to assemble vaccination dataset
+
+It is necessary to have an IDI project if you wish to run the code.  Visit the Stats NZ website for more information about this. 
+
+This analysis has been developed for a particular refresh of the IDI. As changes in database structure can occur between refreshes, the initial preparation of the input information may require updating to run the code in other refreshes.
+
+#### Definitions
+
+1)  Execute all the input definitions
+
+    All the underlying data definitions used in the assembly process (steps 4-6) must have been created prior to the data assembly. Depending on what measures you need for your analysis, you may not need to run every definition in the **definitions** folder. These definitions do __not__ need to be rerun when the input population or immunisation record is updated.
+
+#### SQL table updates
+
+2)  Population creation & CIR data grab
 
     The population is created in SQL using a number of sources. To update the population – required every time MOH uploads additional CIR, HSU, and NHI data – the latest version of **CODE_40_population_and_CIR.sql** needs to be updated and re-run. Save the new version dated as of the date that the code was edited.
 
     There are **four table references at the top of the script (CIR_date, CIR_ref, Adhoc_HSU_ref, CIR_NHI_ref)** which correspond to MOH’s ad hoc tables. The dates correspond do the day the CIR and associated tables are updated, NOT the latest date of the CIR activity.
    
-2)  CIR data tables creation
+3)  CIR data tables creation
 
     There is a section of code at the end of the **CODE_40_population_and_CIR.sql** file which also produces three tables using the CIR data. Two are read into Stata and one is used by the DAT. These tables are: 
 	
@@ -20,9 +40,9 @@ Repositry: covid19_vaccination_update_modelling
 	   
     **To conserve the amount of space the project uses it is recommended to periodically delete the older population and CIR related tables.**
 
-## Data Assembly Tool (Excel files and R studio)
+#### Data Assembly Tool (Excel files and R studio)
 
-3)  Updating the ‘measures’ file’s table references
+4)  Updating the ‘measures’ file’s table references
 
     The Data Assembly Tool is used to merge together the bulk of the data used to create the collaboration file. It must be re-run following the updating of the population and CIR data and its relevant files can be found on [GitHub](https://github.com/nz-social-wellbeing-agency/dataset_assembly_tool).
 
@@ -30,13 +50,13 @@ Repositry: covid19_vaccination_update_modelling
 	
     The ‘Measure_period_start_date’ and ‘Measure_period_end_date’ columns should also be periodically updated, and should correspond to the periods specified within the **‘population_and_period.xlsx’** file (summary_period_start_date and summary_period_end_date).
 	
-4)	Updating the ‘population_and_period’ file’s references
+5)	Updating the ‘population_and_period’ file’s references
 
     The ‘Table_name’, ‘Summary_period_start_date’, ‘Summary_period_end_date’ need to be updated over time. Table_name references the population table created in step 1, above. 
 	
     The ‘Summary_period_end_date’ column should ideally correspond to the date of the latest CIR activity. 
 	
-5)	Running the Dataset Assembly Tool
+6)	Running the Dataset Assembly Tool
 
     R studio is opened in the Start Menu of windows via a web browser shortcut. The script which runs the assembly tool is called **run_assembly.R**. You may need to see the setup instructions ([available here](https://swa.govt.nz/assets/Publications/guidance/Dataset-Assembly-Tool-introduction-and-training-presentation.pdf)) to configure the tool if you have not used it before.
 	
@@ -44,15 +64,15 @@ Repositry: covid19_vaccination_update_modelling
 	
     The script should run seamlessly if only being re-run to update the CIR data. Adding additional indicators to the assebly process can be tricky and should occur in collaboration with an experienced researcher.
 	
-## Data cleaning and collaboration file creation (SQL and Stata)
+#### Data cleaning and collaboration file creation (SQL and Stata)
 
-6)	Creating a Stata friendly sandpit table
+7)	Creating a Stata friendly sandpit table
 
     To create the SQL table that Stata reads we clean the assembled table (rename a few variables and drop others that are created during the assembly process). The SQL code which does this is located here: **SQL_Prepare_DAT_rectangular_table.sql**.
 	
     The script always references the same input table ([tmp_vacc_rectangular]), so only the output table’s name needs to be changed to reflect the new date. This code also merges on the CHiPs data which is address based and therefore cannot be merged using the Dataset Assembly Tool.
 	
-7)	Data cleaning and final table creation using Stata
+8)	Data cleaning and final table creation using Stata
 
     To create the .dta file for our own analysis, and an excel spreadsheet for the collaboration file, we update and run **DAT_cleaning_v10.do**.
 	
@@ -66,3 +86,9 @@ Repositry: covid19_vaccination_update_modelling
 	
     Note that if variables are added or removed from the dataset then this needs to be reflected in this script as it relies on the correct ordering, and number, of columns. This can be done relatively quickly in excel by copying the variables out of Stata and attaching the variable type info with a concatenate function. 
 
+## Citation
+
+Social Wellbeing Agency (2022). COVID19 vaccination update modelling. Source code. https://github.com/nz-social-wellbeing-agency/covid19_vaccination_update_modelling
+
+## Getting Help
+If you have any questions email info@swa.govt.nz
