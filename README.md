@@ -24,7 +24,7 @@ Repositry: covid19_vaccination_update_modelling
 
 3)  Updating the ‘measures’ file’s table references
 
-    The Data Assembly Tool is used to merge together the bulk of the data used to create the collaboration file. It must be re-run following the updating of the population and CIR data and its relevant files can be found in: https://github.com/nz-social-wellbeing-agency/dataset_assembly_tool
+    The Data Assembly Tool is used to merge together the bulk of the data used to create the collaboration file. It must be re-run following the updating of the population and CIR data and its relevant files can be found on [GitHub](https://github.com/nz-social-wellbeing-agency/dataset_assembly_tool).
 
     The **‘measures.xlsx’** file contains a list of indicators. The table references currently only require updating when the IDI refresh changes. You may also need to include additional rows for the newly created dose indicators as required.
 	
@@ -38,7 +38,7 @@ Repositry: covid19_vaccination_update_modelling
 	
 5)	Running the Dataset Assembly Tool
 
-    R studio is opened in the Start Menu of windows via a web browser shortcut. The script which runs the assembly tool is called **run_assembly.R**. You may need to see the setup instructions ((available here)[https://swa.govt.nz/assets/Publications/guidance/Dataset-Assembly-Tool-introduction-and-training-presentation.pdf]) to configure the tool if you have not used it before.
+    R studio is opened in the Start Menu of windows via a web browser shortcut. The script which runs the assembly tool is called **run_assembly.R**. You may need to see the setup instructions ([available here](https://swa.govt.nz/assets/Publications/guidance/Dataset-Assembly-Tool-introduction-and-training-presentation.pdf)) to configure the tool if you have not used it before.
 	
     Within the script, the references to the measures and population files need to be updated (or files need to be changed to have a static name). 
 	
