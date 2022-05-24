@@ -28,7 +28,7 @@ This analysis has been developed for a particular refresh of the IDI. As changes
 
     The population is created in SQL using a number of sources. To update the population – required every time MOH uploads additional CIR, HSU, and NHI data – the latest version of **CODE_40_population_and_CIR.sql** needs to be updated and re-run. Save the new version dated as of the date that the code was edited.
 
-    There are **four table references at the top of the script (CIR_date, CIR_ref, Adhoc_HSU_ref, CIR_NHI_ref)** which correspond to MOH’s ad hoc tables. The dates correspond do the day the CIR and associated tables are updated, NOT the latest date of the CIR activity.
+    There are **four table references at the top of the script (CIR_date, CIR_ref, Adhoc_HSU_ref, CIR_NHI_ref)** which correspond to MOH’s ad hoc tables. The latter three references' dates correspond do the date the CIR and associated tables are updated, NOT the latest date of the CIR activity.
    
 3)  CIR data tables creation
 
@@ -54,7 +54,7 @@ This analysis has been developed for a particular refresh of the IDI. As changes
 
     The ‘Table_name’, ‘Summary_period_start_date’, ‘Summary_period_end_date’ need to be updated over time. Table_name references the population table created in step 1, above. 
 	
-    The ‘Summary_period_end_date’ column should ideally correspond to the date of the latest CIR activity. 
+    The ‘Summary_period_end_date’ column should ideally correspond to the date of the latest CIR activity. The CIR data is currently being updated on a monthly basis.
 	
 6)	Running the Dataset Assembly Tool
 
@@ -62,7 +62,7 @@ This analysis has been developed for a particular refresh of the IDI. As changes
 	
     Within the script, the references to the measures and population files need to be updated (or files need to be changed to have a static name). 
 	
-    The script should run seamlessly if only being re-run to update the CIR data. Adding additional indicators to the assebly process can be tricky and should occur in collaboration with an experienced researcher.
+    The script should run seamlessly if only being re-run to update the CIR data. Adding additional indicators to the assembly process can be tricky and should occur in collaboration with an experienced researcher.
 	
 #### Data cleaning and collaboration file creation (SQL and Stata)
 
@@ -74,7 +74,7 @@ This analysis has been developed for a particular refresh of the IDI. As changes
 	
 8)	Data cleaning and final table creation using Stata
 
-    To create the .dta file for our own analysis, and an excel spreadsheet for the collaboration file, we update and run **DAT_cleaning_v10.do**.
+    To create the .dta file for our own analysis, and an excel spreadsheet for the collaboration file, we update and run **_2_DAT_cleaning_vXX.do**.
 	
     Before running the script the user needs to update the six macros at the top of the code. These inform the script of the date of the CIR’s latest vaccination data, the names of the SQL tables to read in, and today’s date for naming of collaboration files.
 	
